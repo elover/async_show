@@ -4,7 +4,6 @@
 
 var express = require('express');
 var app = express();
-
 app.get('/', async function (req, res, next) {
     try{
         var getAsync1 = await async1();
@@ -15,25 +14,22 @@ app.get('/', async function (req, res, next) {
         res.send(e.message);
     }
 });
-
 async function async1() {
     return new Promise(function (resolve, reject) {
-        //throw Error('error1');
+        //throw Error('error1'); // @1 捕获
         setTimeout(function () {
-            //throw Error('error1');
+            //throw Error('error1'); // @2 crash
             resolve("Hello");
         }, 1);
     });
 }
-
 // 异步1
 async function async2() {
     return new Promise(function (resolve, reject) {
-        //throw Error('error1');
+        //throw Error('error1'); // @3 捕获
         setTimeout(function () {
             resolve(" World");
         }, 1);
     });
 }
-
 module.exports = app;

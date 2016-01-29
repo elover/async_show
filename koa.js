@@ -1,13 +1,11 @@
 var koa = require("koa");
 var app = koa();
-
 // 错误捕获
 app.use(function *(next) {
     var getPromise = yield promise();
     var getThunks = yield thunks();
     this.body = getPromise + getThunks;
 });
-
 // promise 推荐
 function promise() {
     return new Promise(function (resolve, reject) {
@@ -18,7 +16,6 @@ function promise() {
         }, 1);
     })
 }
-
 // thunks function 不推荐
 function thunks() {
     return function (fn) {
@@ -29,9 +26,6 @@ function thunks() {
         })
     }
 }
-
 app.listen(3000, function () {
     console.log('node listen localhost:3000');
 });
-
-
